@@ -1,0 +1,6 @@
+# requirements.txt 파일 내용 확인
+
+streamlit
+openai
+requests
+python-dotenv
