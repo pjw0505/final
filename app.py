@@ -12,7 +12,19 @@ import time # 시뮬레이션 지연용
 # 1. 클라이언트 초기화 함수 (st.secrets 사용)
 # -------------------------------------------------------
 
+# app.py 파일 내 get_openai_client 함수
 @st.cache_resource
+def get_openai_client():
+    
+    try:
+        # 💥 반드시 MY_OPENAI_KEY를 읽도록 수정합니다. 💥
+        api_key = st.secrets["secrets"]["MY_OPENAI_KEY"].strip() 
+    except KeyError:
+        st.error("오류: Streamlit Secrets에 [secrets] 섹션 또는 MY_OPENAI_KEY가 누락되었습니다.")
+        st.stop()
+        
+    # ... (나머지 로직)
+    return OpenAI(api_key=api_key)
 def get_openai_client():
     """Streamlit Secrets에서 API 키를 읽어 OpenAI 클라이언트를 초기화합니다."""
     
